@@ -9,8 +9,6 @@ runs:
   steps:
     - name: Checkout
       uses: actions/checkout@v3
-    - run: |
-        tmpdir="$(mktemp --directory)"
-        git clone https://github.com/asdf-vm/asdf.git "$tmpdir" --depth 1 --branch v0.10.2
-        "${tmpdir}/bin/asdf" current 2>&1 | grep -v '______' | awk '{print $1 "=" $2}' | tee $GITHUB_OUTPUT
+    - uses: asdf-vm/actions/setup@v1
+    - run: asdf current 2>&1 | grep -v '______' | awk '{print $1 "=" $2}' | tee $GITHUB_OUTPUT
       shell: bash
