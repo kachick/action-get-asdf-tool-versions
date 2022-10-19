@@ -1,29 +1,16 @@
-name: 'deploy-yard-to-pages'
-description: 'Deploy YARD documents to GitHub Pages'
+name: 'action-get-asdf-tool-versions'
+description: 'Parse asdf managed .tool-versions and outputs them'
 author: 'Kenichi Kamiya <kachick1@gmail.com>'
 branding:
-  icon: 'upload'
+  icon: 'eye'
   color: 'blue'
-inputs:
-  output-dir:
-    description: 'YARD generated HTMls in'
-    required: true
-    default: 'doc'
 runs:
   using: 'composite'
   steps:
     - name: Checkout
       uses: actions/checkout@v3
-    - uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: '3.1'
-        bundler-cache: true # runs 'bundle install' and caches installed gems automatically
-    - run: bundle exec yard
+    - run: |
+        tmpdir="$(mktemp --directory)"
+        git clone https://github.com/asdf-vm/asdf.git "$tmpdir" --depth 1 --branch v0.10.2
+        "${tmpdir}/bin/asdf" current 2>&1 | grep -v '______' | awk '{print $1 "=" $2}' | tee $GITHUB_OUTPUT
       shell: bash
-    - uses: actions/configure-pages@v2
-    - uses: actions/upload-pages-artifact@v1
-      with:
-        # Upload entire repository
-        path: ${{ inputs.output-dir }}
-    - id: deployment
-      uses: actions/deploy-pages@v1

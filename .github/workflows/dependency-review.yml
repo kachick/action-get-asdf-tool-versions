@@ -3,8 +3,6 @@ on:
   pull_request:
     paths:
       - '.github/workflows/**'
-      - 'package.json'
-      - 'package-lock.json'
 
 permissions:
   contents: read
@@ -16,8 +14,7 @@ jobs:
       - name: 'Checkout Repository'
         uses: actions/checkout@v3
       - name: 'Dependency Review'
-        # Workaround for https://github.com/actions/dependency-review-action/pull/131
-        uses: kachick/dependency-review-action@v2
+        uses: actions/dependency-review-action@v2
         with:
           # https://spdx.org/licenses/
           allow-licenses: MIT, BSD-3-Clause, BSD-2-Clause, 0BSD, Unlicense, ISC, Apache-2.0
