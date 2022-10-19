@@ -30,6 +30,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: ./
-        id: asdf-tool_versions
-      - run: echo "${{ steps.asdf-tool_versions.outputs.shfmt }}"
-      - run: echo "${{ steps.asdf-tool_versions.outputs.shellcheck }}"
+        id: asdf_parser
+      - run: echo "${{ steps.asdf_parser.outputs.tool-versions.shfmt }}"
+      - run: echo "${{ steps.asdf_parser.outputs.tool-versions.shellcheck }}"

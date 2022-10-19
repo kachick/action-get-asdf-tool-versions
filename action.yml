@@ -11,3 +11,8 @@ runs:
     - uses: asdf-vm/actions/plugins-add@v1
     - run: asdf current 2>&1 | grep -v '______' | awk '{print $1 "=" $2}' | tee --append $GITHUB_OUTPUT
       shell: bash
+      id: parser
+outputs:
+  tool-versions:
+    description: 'Parsed .tool-versions'
+    value: ${{ steps.parser.outputs }}
