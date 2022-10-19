@@ -31,5 +31,5 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./
         id: asdf-tool_versions
-      - run: echo "${{ steps.asdf-tool_versions.shfmt }}"
-      - run: echo "${{ steps.asdf-tool_versions.shellcheck }}"
+      - run: echo "${{ steps.asdf-tool_versions.outputs.shfmt }}"
+      - run: echo "${{ steps.asdf-tool_versions.outputs.shellcheck }}"
