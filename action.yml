@@ -7,9 +7,7 @@ branding:
 runs:
   using: 'composite'
   steps:
-    - name: Checkout
-      uses: actions/checkout@v3
     - uses: asdf-vm/actions/setup@v1
     - uses: asdf-vm/actions/plugins-add@v1
-    - run: asdf current 2>&1 | grep -v '______' | awk '{print $1 "=" $2}' | tee $GITHUB_OUTPUT
+    - run: asdf current 2>&1 | grep -v '______' | awk '{print $1 "=" $2}' | tee --append $GITHUB_OUTPUT
       shell: bash
