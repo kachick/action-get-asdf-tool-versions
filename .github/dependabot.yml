@@ -8,7 +8,6 @@ updates:
     directory: '/'
     schedule:
       interval: 'daily'
-      timezone: 'Asia/Tokyo'
     ignore:
       - dependency-name: '@types/*'
         update-types: ['version-update:semver-major']
