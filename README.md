@@ -15,7 +15,7 @@ jobs:
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v3
-      - uses: kachick/action-parse-asdf-tool-versions@main
+      - uses: kachick/action-parse-asdf-tool-versions@v1
         id: parse
     outputs:
     tool-versions: "${{ steps.parse.outputs.json }}"
