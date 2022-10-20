@@ -1,4 +1,4 @@
-name: 'action-get-asdf-tool-versions'
+name: 'action-parse-asdf-tool-versions'
 description: 'Parse asdf managed .tool-versions and outputs them'
 author: 'Kenichi Kamiya <kachick1@gmail.com>'
 branding:

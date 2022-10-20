@@ -1,8 +1,8 @@
-# action-get-asdf-tool-versions
+# action-parse-asdf-tool-versions
 
-[![CI](https://github.com/kachick/action-get-asdf-tool-versions/actions/workflows/validate.yml/badge.svg?branch=main)](https://github.com/kachick/action-get-asdf-tool-versions/actions/workflows/validate.yml?query=branch%3Amain++)
+[![CI](https://github.com/kachick/action-parse-asdf-tool-versions/actions/workflows/validate.yml/badge.svg?branch=main)](https://github.com/kachick/action-parse-asdf-tool-versions/actions/workflows/validate.yml?query=branch%3Amain++)
 
-Parse asdf managed .tool-versions with asdf-vm built-in features
+Parse asdf managed .tool-versions with [asdf-vm built-in function](https://github.com/asdf-vm/asdf/blob/eaf2215cb8adc9c3b74dbcbee034aba8ffa92dda/lib/utils.bash#L652-L662)
 
 # Usage
 
@@ -15,7 +15,7 @@ jobs:
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v3
-      - uses: kachick/action-get-asdf-tool-versions
+      - uses: kachick/action-parse-asdf-tool-versions
         id: parse
     outputs:
       tool-versions: ${{ steps.parse.outputs.json }}
