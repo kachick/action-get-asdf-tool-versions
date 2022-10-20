@@ -7,16 +7,7 @@ branding:
 runs:
   using: 'composite'
   steps:
-    - uses: actions/checkout@v3
-    - name: Pick requirements from .tool-versions
-      id: requirements
-      run: echo "runner-tool-versions=$(grep bun .tool-versions)" >> $GITHUB_OUTPUT
-      shell: bash
-    - uses: asdf-vm/actions/install@v1
-      with:
-        tool_versions: ${{ steps.requirements.outputs.runner-tool-versions }}
-    # Needless setup while we use install for the preparation
-    # - uses: asdf-vm/actions/setup@v1
+    - uses: antongolub/action-setup-bun@v1
     - run: bun install
       shell: bash
     - run: (source "$ASDF_DIR/lib/utils.bash"; strip_tool_version_comments .tool-versions) | bun run jsonizer.ts  | echo "json=$(</dev/stdin)" | tee --append $GITHUB_OUTPUT
