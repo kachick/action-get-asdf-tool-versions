@@ -40,4 +40,4 @@ jobs:
     steps:
       - run: echo '${{ fromJson(needs.parser.outputs.tool-versions).shfmt }}' | grep -P '\A\d+\.\d+\.\d+\z'
       - run: echo '${{ fromJson(needs.parser.outputs.tool-versions).shellcheck }}' | grep -P '\A\d+\.\d+\.\d+\z'
-      - run: test '18.11.42' = '${{ fromJson(needs.parser.outputs.tool-versions).nodejs }}'
+      - run: test '18.11.0' = '${{ fromJson(needs.parser.outputs.tool-versions).nodejs }}'
