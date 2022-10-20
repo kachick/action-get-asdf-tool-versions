@@ -7,11 +7,11 @@ branding:
 runs:
   using: 'composite'
   steps:
-    - uses: antongolub/action-setup-bun@v1
-    - run: bun install
-      shell: bash
     - uses: asdf-vm/actions/setup@v1
-    - run: (source "$ASDF_DIR/lib/utils.bash"; strip_tool_version_comments .tool-versions) | bun run jsonizer.ts  | echo "json=$(</dev/stdin)" | tee --append $GITHUB_OUTPUT
+    - run: |
+        (source "$ASDF_DIR/lib/utils.bash"; strip_tool_version_comments .tool-versions) |
+        ruby -r json -e 'print(STDIN.each_line.to_h {|line| line.split.slice(0, 2) }.to_json)' |
+        echo "json=$(</dev/stdin)" | tee --append $GITHUB_OUTPUT
       shell: bash
       id: parser
 outputs:
