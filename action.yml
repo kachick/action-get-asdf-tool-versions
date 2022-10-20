@@ -21,7 +21,7 @@ runs:
         crystal: ${{ steps.prepare-runner.outputs.crystal }}
     - run: |
         (source "$ASDF_DIR/lib/utils.bash"; strip_tool_version_comments .tool-versions) |
-        crystal run $GITHUB_ACTION_PATH/src/main.cr -- jsonize |
+        crystal run $GITHUB_ACTION_PATH/src/cli.cr -- jsonize |
         echo "json=$(</dev/stdin)" | tee --append $GITHUB_OUTPUT
       shell: bash
       id: parser

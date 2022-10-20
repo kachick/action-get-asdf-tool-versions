@@ -107,8 +107,6 @@ __tests__/runner/*
 
 .DS_Store
 
-*.lock
-
 # Ruby section
 
 /.yardoc/
@@ -132,3 +130,5 @@ __tests__/runner/*
 /test/version_tmp/
 /tmp/*
 !/tmp/.keep
+
+bin
