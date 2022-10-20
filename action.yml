@@ -15,7 +15,6 @@ runs:
     - uses: asdf-vm/actions/install@v1
       with:
         tool_versions: ${{ steps.requirements.outputs.runner-tool-versions }}
-      shell: bash
     # Needless setup while we use install for the preparation
     # - uses: asdf-vm/actions/setup@v1
     - run: bun install
