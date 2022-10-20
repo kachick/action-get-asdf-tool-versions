@@ -1,18 +1,6 @@
 name: Release CLI
 on:
   push:
-    branches: [main]
-    paths:
-      - '.github/release.yml'
-      - '**/*.cr'
-      - 'shard.lock'
-      - 'shard.yml'
-  pull_request:
-    paths:
-      - '.github/crystal.yml'
-      - '**/*.cr'
-      - 'shard.lock'
-      - 'shard.yml'
   workflow_dispatch:
 
 jobs:
