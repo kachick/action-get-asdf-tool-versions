@@ -7,6 +7,7 @@ branding:
 runs:
   using: 'composite'
   steps:
+    - uses: actions/checkout@v3
     - uses: asdf-vm/actions/setup@v1
     - uses: crystal-lang/install-crystal@v1
     - run: |
