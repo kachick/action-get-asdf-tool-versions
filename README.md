@@ -18,7 +18,7 @@ jobs:
       - uses: kachick/action-get-asdf-tool-versions
         id: parse
     outputs:
-      tool-versions: ${{ steps.parse.outputs.tool-versions }}
+      tool-versions: ${{ steps.parse.outputs.json }}
   test:
     needs: [asdf-parser]
     timeout-minutes: 15
