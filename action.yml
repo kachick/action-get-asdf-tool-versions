@@ -12,8 +12,10 @@ runs:
     - uses: asdf-vm/actions/plugins-add@v1
     - uses: actions/setup-node@v3
       with:
-        node-version: 18
+        node-version: 16
         cache: npm
+    - run: npm ci --ignore-scripts
+      shell: bash
     - run: asdf current 2>&1 | grep -v '______' | npx ts-node src/main.ts | echo "json=$(</dev/stdin)" | tee --append $GITHUB_OUTPUT
       shell: bash
       id: parser
