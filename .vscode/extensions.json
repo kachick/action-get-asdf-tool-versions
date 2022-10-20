@@ -2,6 +2,7 @@
   "recommendations": [
     "redhat.vscode-yaml",
     "editorconfig.editorconfig",
-    "dprint.dprint"
+    "dprint.dprint",
+    "crystal-lang-tools.crystal-lang"
   ]
 }

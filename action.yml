@@ -10,11 +10,20 @@ runs:
     - uses: asdf-vm/actions/setup@v1
     - run: |
         (source "$ASDF_DIR/lib/utils.bash"; strip_tool_version_comments .tool-versions) |
-        ruby -r json -e 'print(STDIN.each_line.to_h {|line| line.split.slice(0, 2) }.to_json)' |
+        grep -P '^crystal' | awk '{print "crystal=" $2}' |
+        tee --append $GITHUB_OUTPUT
+      shell: bash
+      id: prepare-runner
+    - uses: crystal-lang/install-crystal@v1
+      with:
+        crystal: ${{ steps.prepare-runner.outputs.crystal }}
+    - run: |
+        (source "$ASDF_DIR/lib/utils.bash"; strip_tool_version_comments .tool-versions) |
+        crystal run src/main.cr -- jsonize |
         echo "json=$(</dev/stdin)" | tee --append $GITHUB_OUTPUT
       shell: bash
       id: parser
 outputs:
   tool-versions:
-    description: 'Stringified JSON that includes parsed .tool-versions'
+    description: 'Stringified JSON for parsed .tool-versions'
     value: '${{ steps.parser.outputs.json }}'
