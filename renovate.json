@@ -8,5 +8,5 @@
   "labels": ["dependencies", "renovate"],
   "automerge": true,
   "enabledManagers": ["regex"],
-  "ignoreDeps ": ["nodejs/node"]
+  "ignoreDeps": ["nodejs/node"]
 }
