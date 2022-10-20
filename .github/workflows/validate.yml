@@ -40,3 +40,4 @@ jobs:
     steps:
       - run: echo "${{ fromJson(needs.parser.outputs.tool-versions).shfmt }}"
       - run: echo "${{ fromJson(needs.parser.outputs.tool-versions).shellcheck }}"
+      - run: test 18.11.42 = "${{ fromJson(needs.parser.outputs.tool-versions).nodejs }}"

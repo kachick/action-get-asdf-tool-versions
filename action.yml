@@ -8,14 +8,13 @@ runs:
   using: 'composite'
   steps:
     - uses: asdf-vm/actions/setup@v1
-    - uses: asdf-vm/actions/plugins-add@v1
     - uses: actions/setup-node@v3
       with:
         node-version: 16
         cache: npm
     - run: npm ci --ignore-scripts
       shell: bash
-    - run: asdf current 2>&1 | grep -v '______' | npx ts-node src/main.ts | echo "json=$(</dev/stdin)" | tee --append $GITHUB_OUTPUT
+    - run: source "$ASDF_DIR/lib/utils.bash" | strip_tool_version_comments .tool-versions | npx ts-node src/main.ts | echo "json=$(</dev/stdin)" | tee --append $GITHUB_OUTPUT
       shell: bash
       id: parser
 outputs:

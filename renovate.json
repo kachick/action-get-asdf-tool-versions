@@ -7,5 +7,6 @@
   ],
   "labels": ["dependencies", "renovate"],
   "automerge": true,
-  "enabledManagers": ["regex"]
+  "enabledManagers": ["regex"],
+  "ignoreDeps ": ["nodejs/node"]
 }
