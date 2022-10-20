@@ -7,15 +7,26 @@ branding:
 runs:
   using: 'composite'
   steps:
-    - uses: actions/checkout@v3
     - uses: asdf-vm/actions/setup@v1
+    - run: |
+        (source "$ASDF_DIR/lib/utils.bash"; strip_tool_version_comments $GITHUB_ACTION_PATH/.tool-versions) |
+        grep -P '^crystal' | awk '{print "crystal=" $2}' |
+        tee --append $GITHUB_OUTPUT
+      shell: bash
+      id: prepare-runner
+      env:
+        GITHUB_ACTION_PATH: ${{ github.action_path }}
     - uses: crystal-lang/install-crystal@v1
+      with:
+        crystal: ${{ steps.prepare-runner.outputs.crystal }}
     - run: |
         (source "$ASDF_DIR/lib/utils.bash"; strip_tool_version_comments .tool-versions) |
-        crystal run src/main.cr -- jsonize |
+        crystal run $GITHUB_ACTION_PATH/src/main.cr -- jsonize |
         echo "json=$(</dev/stdin)" | tee --append $GITHUB_OUTPUT
       shell: bash
       id: parser
+      env:
+        GITHUB_ACTION_PATH: ${{ github.action_path }}
 outputs:
   json:
     description: 'Stringified JSON for parsed .tool-versions'
