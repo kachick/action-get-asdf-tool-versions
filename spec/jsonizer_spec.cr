@@ -6,7 +6,7 @@ require "json"
 
 describe Jsonizer do
   describe ".run" do
-    it "outputs usage" do
+    it "returns serialized JSON" do
       io = IO::Memory.new(
         <<-TEXT
         shellcheck 0.8.0 0.7.2
