@@ -8,20 +8,14 @@ runs:
   using: 'composite'
   steps:
     - uses: asdf-vm/actions/setup@v1
-    - run: |
-        (source "$ASDF_DIR/lib/utils.bash"; strip_tool_version_comments $GITHUB_ACTION_PATH/.tool-versions) |
-        grep -P '^crystal' | awk '{print "crystal=" $2}' |
-        tee --append $GITHUB_OUTPUT
+    - name: Install tool
+      run: wget https://github.com/kachick/action-parse-asdf-tool-versions/releases/download/v1-beta/cli "$GITHUB_ACTION_PATH/bin"  && chmod 755 "$GITHUB_ACTION_PATH/bin/cli"
       shell: bash
-      id: prepare-runner
       env:
         GITHUB_ACTION_PATH: ${{ github.action_path }}
-    - uses: crystal-lang/install-crystal@v1
-      with:
-        crystal: ${{ steps.prepare-runner.outputs.crystal }}
     - run: |
         (source "$ASDF_DIR/lib/utils.bash"; strip_tool_version_comments .tool-versions) |
-        crystal run $GITHUB_ACTION_PATH/src/cli.cr -- jsonize |
+        "$GITHUB_ACTION_PATH/bin/cli" jsonize |
         echo "json=$(</dev/stdin)" | tee --append $GITHUB_OUTPUT
       shell: bash
       id: parser
