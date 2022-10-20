@@ -14,7 +14,7 @@
     "singleQuote": true
   },
   "includes": ["**/*.{ts,tsx,js,jsx,cjs,mjs,json,md,yml}"],
-  "excludes": ["**/node_modules", "**/*-lock.json", "lib/**", "dist/**"],
+  "excludes": ["**/node_modules", "**/*-lock.json", "dist/**"],
   "plugins": [
     "https://plugins.dprint.dev/typescript-0.75.0.wasm",
     "https://plugins.dprint.dev/json-0.15.6.wasm",

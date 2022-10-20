@@ -24,12 +24,19 @@ on:
   workflow_dispatch:
 
 jobs:
-  validate: # make sure the action works on a clean machine
+  parser:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 5
     steps:
       - uses: actions/checkout@v3
       - uses: ./
         id: asdf_parser
-      - run: echo "${{ steps.asdf_parser.outputs.tool-versions.shfmt }}"
-      - run: echo "${{ steps.asdf_parser.outputs.tool-versions.shellcheck }}"
+    outputs:
+      tool-versions: ${{ steps.asdf_parser.outputs.tool-versions }}
+  validate: # make sure the action works on a clean machine
+    needs: [parser]
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - run: echo "${{ fromJson(needs.parser.outputs.tool-versions).shfmt }}"
+      - run: echo "${{ fromJson(needs.parser.outputs.tool-versions).shellcheck }}"

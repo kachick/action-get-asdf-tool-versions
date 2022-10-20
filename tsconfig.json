@@ -1,0 +1,9 @@
+{
+  "extends": "@tsconfig/node16-strictest-esm/tsconfig.json",
+  "compilerOptions": {
+    // https://www.typescriptlang.org/docs/handbook/esm-node.html
+    "module": "node16",
+    "noEmit": true
+  },
+  "include": ["**/*.ts"]
+}
