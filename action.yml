@@ -8,8 +8,7 @@ runs:
   using: 'composite'
   steps:
     - uses: asdf-vm/actions/setup@v1
-    - name: Install tool
-      run: wget https://github.com/kachick/action-parse-asdf-tool-versions/releases/download/v1-beta/cli --directory-prefix="$GITHUB_ACTION_PATH/bin" && chmod 755 "$GITHUB_ACTION_PATH/bin/cli"
+    - run: wget https://github.com/kachick/action-parse-asdf-tool-versions/releases/download/v1/cli --directory-prefix="$GITHUB_ACTION_PATH/bin" && chmod 755 "$GITHUB_ACTION_PATH/bin/cli"
       shell: bash
       env:
         GITHUB_ACTION_PATH: ${{ github.action_path }}
