@@ -34,7 +34,7 @@ jobs:
       - uses: ./
         id: asdf_parser
     outputs:
-      tool-versions: ${{ steps.asdf_parser.outputs.json }}
+      tool-versions: '${{ steps.asdf_parser.outputs.json }}'
   validate: # make sure the action works on a clean machine
     needs: [parser]
     runs-on: ubuntu-latest
