@@ -7,6 +7,7 @@ branding:
 runs:
   using: 'composite'
   steps:
+    - uses: actions/checkout@v3
     - uses: antongolub/action-setup-bun@v1
     - run: bun install
       shell: bash
