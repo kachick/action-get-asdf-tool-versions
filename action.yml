@@ -8,11 +8,15 @@ runs:
   using: 'composite'
   steps:
     - uses: asdf-vm/actions/setup@v1
-    - uses: actions/setup-node@v3
+    - name: Pick requirements from .tool-versions
+      id: requirements
+      run: echo "runner-tool-versions=$(grep bun .tool-versions)" >> $GITHUB_OUTPUT
+      shell: bash
+    - uses: asdf-vm/actions/install@v1
       with:
-        node-version: 16
-        cache: npm
-    - run: npm ci --ignore-scripts
+        tool_versions: ${{ steps.requirements.outputs.runner-tool-versions }}
+      shell: bash
+    - run: bun install
       shell: bash
     - run: (source "$ASDF_DIR/lib/utils.bash"; strip_tool_version_comments .tool-versions) | bun run jsonizer.ts  | echo "json=$(</dev/stdin)" | tee --append $GITHUB_OUTPUT
       shell: bash
