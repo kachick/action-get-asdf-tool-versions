@@ -38,6 +38,6 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - run: echo "${{ fromJson(needs.parser.outputs.tool-versions).shfmt }}"
-      - run: echo "${{ fromJson(needs.parser.outputs.tool-versions).shellcheck }}"
-      - run: test 18.11.42 = "${{ fromJson(needs.parser.outputs.tool-versions).nodejs }}"
+      - run: echo '${{ fromJson(needs.parser.outputs.tool-versions).shfmt }}' | grep -P '\A\d+\.\d+\.\d+\z'
+      - run: echo '${{ fromJson(needs.parser.outputs.tool-versions).shellcheck }}' | grep -P '\A\d+\.\d+\.\d+\z'
+      - run: test '18.11.42' = '${{ fromJson(needs.parser.outputs.tool-versions).nodejs }}'
