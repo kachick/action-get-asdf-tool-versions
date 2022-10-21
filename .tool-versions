@@ -1,4 +1,4 @@
 shellcheck 0.8.0 0.7.2
 nodejs 18.11.0 16.17.1 # This entry exists for test
 shfmt 3.5.1
-crystal 1.6.0
+crystal 1.6.1
