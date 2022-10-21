@@ -5,10 +5,12 @@ on:
     paths:
       - '.github/crystal.yml'
       - '**/*.cr'
+      - '.tool-versions'
   pull_request:
     paths:
       - '.github/crystal.yml'
       - '**/*.cr'
+      - '.tool-versions'
   workflow_dispatch:
 
 jobs:
