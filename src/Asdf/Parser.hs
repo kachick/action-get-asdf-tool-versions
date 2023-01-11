@@ -2,8 +2,8 @@
 
 module Asdf.Parser (parseAsdf, toJson) where
 
-import Data.List
-import Text.Printf
+import Data.List (intercalate)
+import Text.Printf (printf)
 
 data Entry = Entry{toolname :: String, versions :: [String]}
 
@@ -23,7 +23,7 @@ parseAsdf :: String -> [Entry]
 parseAsdf content = map entry (map words (filter (/= []) (map (takeWhile (/= '#')) (lines content))))
 
 formatEntry :: Entry -> String
-formatEntry entry = printf "\"%s\":\"%s\"" (toolname entry) (head (versions entry))
+formatEntry e = printf "\"%s\":\"%s\"" (toolname e) (head (versions e))
 
 -- No accurate for some special characters
 toJson :: [Entry] -> String
