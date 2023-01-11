@@ -15,9 +15,9 @@ main = hspec spec
 
 spec :: Spec
 spec = do
-  describe "converts" $ do
+  describe "converting" $ do
     it "returns the first element of a list" $ do
       (parseAsdf content & toJson) `shouldBe` ("{\"shellcheck\":\"0.9.0\",\"nodejs\":\"18.11.0\",\"shfmt\":\"3.6.0\"}" :: String)
 
-    -- it "throws an exception if given an invalid pattern" $ do
-    --   (evaluate (parseAsdf "noversions" & toJson)) `shouldThrow` anyException
+    it "returns empty json for invalid input" $ do
+      (parseAsdf "invalid" & toJson) `shouldBe` ("{}" :: String)
