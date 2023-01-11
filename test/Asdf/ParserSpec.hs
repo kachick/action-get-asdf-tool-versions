@@ -1,7 +1,7 @@
 module Asdf.ParserSpec (main, spec) where
 
 import Test.Hspec
-import Control.Exception (evaluate)
+-- import Control.Exception (evaluate)
 import Asdf.Parser (parseAsdf, toJson)
 import Data.Function ((&))
 
@@ -19,5 +19,5 @@ spec = do
     it "returns the first element of a list" $ do
       (parseAsdf content & toJson) `shouldBe` ("{\"shellcheck\":\"0.9.0\",\"nodejs\":\"18.11.0\",\"shfmt\":\"3.6.0\"}" :: String)
 
-    it "throws an exception if used with an empty list" $ do
-      evaluate (head []) `shouldThrow` anyException
+    -- it "throws an exception if given an invalid pattern" $ do
+    --   (evaluate (parseAsdf "noversions" & toJson)) `shouldThrow` anyException

@@ -19,6 +19,9 @@ entry cells = case cells of
         x:xs -> Entry{ toolname = x, versions = xs }
         _ -> Entry{ toolname = "none", versions = ["none"] }
 
+-- entry :: [String] -> Entry
+-- entry cells = Entry{ toolname = head cells, versions = tail cells }
+
 parseAsdf :: String -> [Entry]
 parseAsdf content = map entry (map words (filter (/= []) (map (takeWhile (/= '#')) (lines content))))
 
