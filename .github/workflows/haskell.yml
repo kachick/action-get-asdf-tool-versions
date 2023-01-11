@@ -1,24 +1,26 @@
-name: CI - Crystal
+name: CI - Haskell
 on:
   push:
     branches: [main]
     paths:
-      - '.github/crystal.yml'
-      - '**/*.cr'
+      - '.github/haskell.yml'
+      - 'app/**'
+      - 'src/**'
+      - 'test/**'
       - '.tool-versions'
   pull_request:
     paths:
-      - '.github/crystal.yml'
-      - '**/*.cr'
+      - '.github/haskell.yml'
+      - 'app/**'
+      - 'src/**'
+      - 'test/**'
       - '.tool-versions'
   workflow_dispatch:
 
 jobs:
-  crystal:
+  haskell:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v3
-      - uses: crystal-lang/install-crystal@v1
-      - run: crystal tool format --check
-      - run: crystal spec
+      - run: cabal test
