@@ -1,6 +1,6 @@
 #!/usr/bin/env cabal
 {- cabal:
-build-depends: base >= 4.7 && < 5
+build-depends: base
             , action-parse-asdf-tool-versions
 -}
 

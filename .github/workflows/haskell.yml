@@ -31,5 +31,14 @@ jobs:
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v3
-      - run: cabal update
+      # - run: cabal update
       - run: cat .tool-versions | cabal v2-run -v0 app/Main.hs
+
+  test:
+    needs: [build]
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - run: echo '${{ fromJson(needs.parser.outputs.tool-versions).shfmt }}' | grep -P '\A\d+\.\d+\.\d+\z'
+      - run: echo '${{ fromJson(needs.parser.outputs.tool-versions).shellcheck }}' | grep -P '\A\d+\.\d+\.\d+\z'
+      - run: test '18.11.0' = '${{ fromJson(needs.parser.outputs.tool-versions).nodejs }}'
