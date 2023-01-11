@@ -37,24 +37,24 @@ library
                        -Wpartial-fields
                        -Wredundant-constraints
 
-executable action-parse-asdf-tool-versions
-  hs-source-dirs:      app
-  main-is:             Main.hs
-  build-depends:       base
-                     , action-parse-asdf-tool-versions
-  default-language:    Haskell2010
-  ghc-options:         -Wall
-                       -Wcompat
-                       -Widentities
-                       -Wincomplete-record-updates
-                       -Wincomplete-uni-patterns
-                       -Wmissing-export-lists
-                       -Wmissing-home-modules
-                       -Wpartial-fields
-                       -Wredundant-constraints
-                       -threaded
-                       -rtsopts
-                       -with-rtsopts=-N
+-- executable action-parse-asdf-tool-versions
+--   hs-source-dirs:      app
+--   main-is:             Main.hs
+--   build-depends:       base
+--                      , action-parse-asdf-tool-versions
+--   default-language:    Haskell2010
+--   ghc-options:         -Wall
+--                        -Wcompat
+--                        -Widentities
+--                        -Wincomplete-record-updates
+--                        -Wincomplete-uni-patterns
+--                        -Wmissing-export-lists
+--                        -Wmissing-home-modules
+--                        -Wpartial-fields
+--                        -Wredundant-constraints
+--                        -threaded
+--                        -rtsopts
+--                        -with-rtsopts=-N
 
 test-suite action-parse-asdf-tool-versions-test
   type:                exitcode-stdio-1.0

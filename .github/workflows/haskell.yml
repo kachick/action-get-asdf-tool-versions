@@ -32,4 +32,4 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: cabal update
-      - run: cabal build
+      - run: cat .tool-versions | cabal v2-run -v0 app/Main.hs
