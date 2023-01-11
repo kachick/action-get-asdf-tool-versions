@@ -32,7 +32,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       # - run: cabal update
-      - run: cat .tool-versions | cabal v2-run -v0 app/Main.hs
+      - run: cat .tool-versions | cabal v2-run -v0 app/Main.hs | echo "json=$(</dev/stdin)" | tee --append $GITHUB_OUTPUT
+        shell: bash
         id: parser
     outputs:
       tool-versions: '${{ steps.parser.outputs.json }}'
