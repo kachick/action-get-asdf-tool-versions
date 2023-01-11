@@ -2,10 +2,11 @@
 
 module Asdf.Parser (parseAsdf, toJson) where
 
-import Data.List (intercalate)
-import Text.Printf (printf)
-import Data.Either (rights)
-import Data.List.NonEmpty as NE
+import safe Data.List (intercalate)
+import safe Text.Printf (printf)
+import safe Data.Either (rights)
+import safe Data.List.NonEmpty as NE ( NonEmpty, fromList, head )
+import Data.Function ((&))
 
 data Entry = Entry{toolname :: String, versions :: NonEmpty String }
 
@@ -13,16 +14,19 @@ data Entry = Entry{toolname :: String, versions :: NonEmpty String }
 
 entry :: [String] -> Either String Entry
 entry cells = case cells of
-        t:v1:vs -> Right Entry{ toolname = t, versions = fromList (v1:vs) }
+        t:v1:vs -> Right Entry{ toolname = t, versions = NE.fromList (v1:vs) }
         _ -> Left "empty versions"
 
+withoutComment :: String -> String
+withoutComment = takeWhile (/= '#')
+
 parseAsdf :: String -> [Entry]
-parseAsdf content =  rights [ entry x | x <- Prelude.map words (Prelude.filter (/= []) (Prelude.map (Prelude.takeWhile (/= '#')) (lines content)))]
+parseAsdf content = lines content & map (words . withoutComment) & filter (/= []) & map entry & rights
 
 formatEntry :: Entry -> String
 formatEntry e = printf "\"%s\":\"%s\"" (toolname e) (NE.head (versions e))
 
--- No accurate for some special characters
+-- No accurate for some special characters. AFAIK, asdf does not have the pattern...
 toJson :: [Entry] -> String
-toJson entries = printf "{%s}" (intercalate "," (Prelude.map formatEntry entries))
+toJson entries = printf "{%s}" (intercalate "," (map formatEntry entries))
 
