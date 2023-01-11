@@ -4,26 +4,19 @@ module Asdf.Parser (parseAsdf, toJson) where
 
 import Data.List (intercalate)
 import Text.Printf (printf)
+import Data.Either (rights)
 
-data Entry = Entry{toolname :: String, versions :: [String]}
-
--- entry :: [String] -> Maybe Entry
--- entry cells = case cells of
---         x:xs -> Just Entry{ toolname = x, versions = xs }
---         _ -> Nothing
+data Entry = Entry{toolname :: String, versions :: [String] }
 
 -- Avoided to depend external libraries as aeson and/or parsec
 
-entry :: [String] -> Entry
+entry :: [String] -> Either String Entry
 entry cells = case cells of
-        x:xs -> Entry{ toolname = x, versions = xs }
-        _ -> Entry{ toolname = "none", versions = ["none"] }
-
--- entry :: [String] -> Entry
--- entry cells = Entry{ toolname = head cells, versions = tail cells }
+        x:xs -> Right Entry{ toolname = x, versions = xs }
+        _ -> Left "empty versions"
 
 parseAsdf :: String -> [Entry]
-parseAsdf content = map entry (map words (filter (/= []) (map (takeWhile (/= '#')) (lines content))))
+parseAsdf content =  rights [ entry x | x <- map words (filter (/= []) (map (takeWhile (/= '#')) (lines content)))]
 
 formatEntry :: Entry -> String
 formatEntry e = printf "\"%s\":\"%s\"" (toolname e) (head (versions e))
