@@ -27,7 +27,12 @@ on:
 
 jobs:
   parser:
-    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      # Syntax https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs
+      matrix:
+        os: ['ubuntu-latest', 'macos-latest']
+    runs-on: ${{ matrix.os }}
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v3
@@ -37,12 +42,7 @@ jobs:
       tool-versions: '${{ steps.asdf_parser.outputs.json }}'
   validate: # make sure the action works on a clean machine
     needs: [parser]
-    strategy:
-      fail-fast: false
-      # Syntax https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs
-      matrix:
-        os: ['ubuntu-latest', 'macos-latest']
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
       - run: echo '${{ fromJson(needs.parser.outputs.tool-versions).shfmt }}' | grep -P '\A\d+\.\d+\.\d+\z'
