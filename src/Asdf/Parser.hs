@@ -17,11 +17,11 @@ entry cells = case cells of
         t:v1:vs -> Right Entry{ toolname = t, versions = NE.fromList (v1:vs) }
         _ -> Left "empty versions"
 
-withoutComment :: String -> String
-withoutComment = takeWhile (/= '#')
+trimComment :: String -> String
+trimComment = takeWhile (/= '#')
 
 parseAsdf :: String -> [Entry]
-parseAsdf content = lines content & map (words . withoutComment) & filter (/= []) & map entry & rights
+parseAsdf content = lines content & map (words . trimComment) & filter (/= []) & map entry & rights
 
 formatEntry :: Entry -> String
 formatEntry e = printf "\"%s\":\"%s\"" (toolname e) (NE.head (versions e))
