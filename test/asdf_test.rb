@@ -14,7 +14,7 @@ class TestAsdf < Test::Unit::TestCase
 EOD
 
   def test_parse_primaries
-    assert_equal({"nodejs"=>"18.11.0", "shellcheck"=>"0.9.0", "shfmt"=>"3.6.0"}, Asdf.parse_primaries(EXAMPLE))
+    assert_equal({'nodejs'=>'18.11.0', 'shellcheck'=>'0.9.0', 'shfmt'=>'3.6.0'}, Asdf.parse_primaries(EXAMPLE))
     assert_equal({}, Asdf.parse_primaries('invalid'))
   end
 end
