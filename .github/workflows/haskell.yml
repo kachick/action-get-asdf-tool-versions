@@ -32,5 +32,4 @@ jobs:
           path: dist-newstyle
           key: ${{ runner.os }}-cabal-test-${{ hashFiles('src/**', 'app/**', '*.cabal') }}
       - run: cabal update
-        if: steps.cache-cabal.outputs.cache-hit != 'true'
       - run: cabal test
