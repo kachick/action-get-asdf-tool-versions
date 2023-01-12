@@ -1,8 +1,7 @@
 {
   "recommendations": [
-    "redhat.vscode-yaml",
     "editorconfig.editorconfig",
-    "dprint.dprint",
-    "haskell.haskell"
+    "redhat.vscode-yaml",
+    "dprint.dprint"
   ]
 }
