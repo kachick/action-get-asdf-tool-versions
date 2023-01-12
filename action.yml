@@ -25,7 +25,11 @@ runs:
       with:
         path: dist-newstyle
         key: ${{ runner.os }}-ghc-${{ steps.haskell-versions.outputs.ghc }}-cabal-${{ steps.haskell-versions.outputs.cabal }}-cabal-local-${{ hashFiles('src/**', 'app/**', '*.cabal') }}
-    - run: cat .tool-versions | cabal v2-run -v0 action-parse-asdf-tool-versions | echo "json=$(</dev/stdin)" | tee --append $GITHUB_OUTPUT
+    - name: Parse .tool-versions and converts to JSON
+      run: |
+        tool_versions_path=$(readlink -f .tool-versions)
+        cd $GITHUB_ACTION_PATH
+        cat "$tool_versions_path" | cabal v2-run -v0 action-parse-asdf-tool-versions | echo "json=$(</dev/stdin)" | tee --append $GITHUB_OUTPUT
       shell: bash
       id: parser
       env:
