@@ -11,7 +11,7 @@ runs:
       run: ruby -v
       shell: bash
     - name: Parse .tool-versions and converts to JSON
-      run: cat .tool-versions | ruby "$GITHUB_ACTION_PATH/scripts/asdf2json.rb" | echo "json=$(</dev/stdin)" | tee --append $GITHUB_OUTPUT
+      run: cat .tool-versions | ruby "$GITHUB_ACTION_PATH/scripts/asdf2json.rb" | echo "json=$(</dev/stdin)" | tee -a $GITHUB_OUTPUT
       shell: bash
       id: parser
       env:
