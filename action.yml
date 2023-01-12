@@ -11,7 +11,9 @@ runs:
       run: |
         echo "ghc=$(ghc --numeric-version)" | tee --append $GITHUB_OUTPUT
         echo "cabal=$(cabal --numeric-version)" | tee --append $GITHUB_OUTPUT
+        cd $GITHUB_ACTION_PATH
         md5sum src/**/*.hs app/*.hs *.cabal | sort | md5sum | awk '{ print "hashfiles="$1 }' | tee --append $GITHUB_OUTPUT
+        popd
       shell: bash
       id: cache-keys
     - name: Cache cabal global
