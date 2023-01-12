@@ -1,4 +1,10 @@
-module Main (main) where
+#!/usr/bin/env cabal
+{- cabal:
+build-depends: base
+            , action-parse-asdf-tool-versions
+-}
+
+module Main where
 import Asdf.Parser (parseAsdf, toJson)
 import Data.Function ((&))
 
