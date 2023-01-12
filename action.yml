@@ -7,15 +7,25 @@ branding:
 runs:
   using: 'composite'
   steps:
-    - uses: asdf-vm/actions/setup@v1
-    - run: wget https://github.com/kachick/action-parse-asdf-tool-versions/releases/download/v1/cli --directory-prefix="$GITHUB_ACTION_PATH/bin" && chmod 755 "$GITHUB_ACTION_PATH/bin/cli"
+    - name: gather haskell versions
+      run: |
+        echo "ghc=$(ghc --numeric-version)" | tee --append $GITHUB_OUTPUT
+        echo "cabal=$(cabal --numeric-version)" | tee --append $GITHUB_OUTPUT
       shell: bash
-      env:
-        GITHUB_ACTION_PATH: ${{ github.action_path }}
-    - run: |
-        (source "$ASDF_DIR/lib/utils.bash"; strip_tool_version_comments .tool-versions) |
-        "$GITHUB_ACTION_PATH/bin/cli" jsonize |
-        echo "json=$(</dev/stdin)" | tee --append $GITHUB_OUTPUT
+      id: haskell-versions
+    - name: Cache cabal global
+      id: cache-cabal-global
+      uses: actions/cache@v3
+      with:
+        path: ~/.cabal
+        key: ${{ runner.os }}-ghc-${{ steps.haskell-versions.outputs.ghc }}-cabal-${{ steps.haskell-versions.outputs.cabal }}-cabal-global-${{ hashFiles('src/**', 'app/**', '*.cabal') }}
+    - name: Cache cabal work
+      id: cache-cabal-local
+      uses: actions/cache@v3
+      with:
+        path: dist-newstyle
+        key: ${{ runner.os }}-ghc-${{ steps.haskell-versions.outputs.ghc }}-cabal-${{ steps.haskell-versions.outputs.cabal }}-cabal-local-${{ hashFiles('src/**', 'app/**', '*.cabal') }}
+    - run: cat .tool-versions | cabal v2-run -v0 action-parse-asdf-tool-versions | echo "json=$(</dev/stdin)" | tee --append $GITHUB_OUTPUT
       shell: bash
       id: parser
       env:

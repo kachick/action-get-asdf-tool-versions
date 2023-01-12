@@ -3,6 +3,6 @@
     "redhat.vscode-yaml",
     "editorconfig.editorconfig",
     "dprint.dprint",
-    "crystal-lang-tools.crystal-lang"
+    "haskell.haskell"
   ]
 }

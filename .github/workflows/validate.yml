@@ -4,7 +4,7 @@ on:
     branches: [main]
     paths-ignore:
       - '.github/dependabot.yml'
-      - '.github/workflows/crystal.yml'
+      - '.github/workflows/haskell.yml'
       - '.github/workflows/dprint.yml'
       - '.github/workflows/dependency-review.yml'
       - '.github/workflows/merge-bot-pr.yml'
@@ -15,7 +15,7 @@ on:
   pull_request:
     paths-ignore:
       - '.github/dependabot.yml'
-      - '.github/workflows/crystal.yml'
+      - '.github/workflows/haskell.yml'
       - '.github/workflows/dprint.yml'
       - '.github/workflows/dependency-review.yml'
       - '.github/workflows/merge-bot-pr.yml'

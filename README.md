@@ -1,9 +1,9 @@
 # action-parse-asdf-tool-versions
 
 [![CI](https://github.com/kachick/action-parse-asdf-tool-versions/actions/workflows/validate.yml/badge.svg?branch=main)](https://github.com/kachick/action-parse-asdf-tool-versions/actions/workflows/validate.yml?query=branch%3Amain++)
+[![CI - Haskell](https://github.com/kachick/action-parse-asdf-tool-versions/actions/workflows/haskell.yml/badge.svg?branch=main)](https://github.com/kachick/action-parse-asdf-tool-versions/actions/workflows/haskell.yml?query=branch%3Amain++)
 
-Parse asdf managed .tool-versions with [asdf-vm built-in function](https://github.com/asdf-vm/asdf/blob/eaf2215cb8adc9c3b74dbcbee034aba8ffa92dda/lib/utils.bash#L652-L662).\
-So will work even if the .tool-versions using [comments](https://github.com/asdf-vm/asdf/blob/24b46078e33243596dede9c0b78b599a91c2e24c/docs/manage/configuration.md?plain=1#L22-L28) and [multiple versions](https://github.com/asdf-vm/asdf/blob/24b46078e33243596dede9c0b78b599a91c2e24c/docs/manage/configuration.md?plain=1#L39-L43).
+Parse asdf .tool-versions and outputs with JSON
 
 # Usage
 
