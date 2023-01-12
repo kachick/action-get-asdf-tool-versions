@@ -1,9 +1,10 @@
 # action-parse-asdf-tool-versions
 
-[![CI](https://github.com/kachick/action-parse-asdf-tool-versions/actions/workflows/validate.yml/badge.svg?branch=main)](https://github.com/kachick/action-parse-asdf-tool-versions/actions/workflows/validate.yml?query=branch%3Amain++)
-[![CI - Haskell](https://github.com/kachick/action-parse-asdf-tool-versions/actions/workflows/haskell.yml/badge.svg?branch=main)](https://github.com/kachick/action-parse-asdf-tool-versions/actions/workflows/haskell.yml?query=branch%3Amain++)
+[![CI - Itself](https://github.com/kachick/action-parse-asdf-tool-versions/actions/workflows/validate.yml/badge.svg?branch=main)](https://github.com/kachick/action-parse-asdf-tool-versions/actions/workflows/validate.yml?query=branch%3Amain++)
+[![CI - Test](https://github.com/kachick/action-parse-asdf-tool-versions/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/kachick/action-parse-asdf-tool-versions/actions/workflows/test.yml?query=branch%3Amain++)
 
-Parse asdf .tool-versions and outputs with JSON
+Parse asdf .tool-versions and outputs with JSON for actions
+Tested with ubuntu-latest and macos-latest.
 
 # Usage
 
@@ -41,4 +42,4 @@ Actual working examples are below.
 - [bun](https://github.com/kachick/kachick.github.io/blob/924a9306b48bdc5378426a84075908fc4cae1cdc/.github/workflows/lint.yml#L27)
 - [dprint](https://github.com/kachick/renovate-config-asdf/blob/d1426468e080110293038ec3ffed6aa843c93eae/.github/workflows/lint.yml#L30)
 
-v1 and v2 takes same inputs. Just replaced the implementation. (v2 might take long time than v1...)
+v1 ~ v3 takes same inputs. Just replaced the implementation. (v2 might take long time than v1...)

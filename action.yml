@@ -7,41 +7,11 @@ branding:
 runs:
   using: 'composite'
   steps:
-    - name: gather haskell versions
-      run: |
-        echo $PWD
-        echo "ghc=$(ghc --numeric-version)" | tee --append $GITHUB_OUTPUT
-        echo "cabal=$(cabal --numeric-version)" | tee --append $GITHUB_OUTPUT
-        cd $GITHUB_ACTION_PATH
-        md5sum src/**/*.hs app/*.hs *.cabal | sort | md5sum | awk '{ print "hashfiles="$1 }' | tee --append $GITHUB_OUTPUT
-        if echo $GITHUB_ACTION_PATH | grep '/home/runner/work/_actions'; then
-          echo "cabal-local-path=$GITHUB_ACTION_PATH/dist-newstyle" | tee --append $GITHUB_OUTPUT
-        else
-          echo "cabal-local-path=dist-newstyle" | tee --append $GITHUB_OUTPUT
-        fi
-        echo $PWD
+    - name: logging tool versions
+      run: ruby -v
       shell: bash
-      id: cache-keys
-    - name: Cache cabal global
-      id: cache-cabal-global
-      uses: actions/cache@v3
-      with:
-        path: ~/.cabal
-        # Do not use `hashFiles` expression in composite actions
-        key: ${{ runner.os }}-ghc-${{ steps.cache-keys.outputs.ghc }}-cabal-${{ steps.cache-keys.outputs.cabal }}-cabal-global-${{ steps.cache-keys.outputs.hashfiles }}
-    - name: Cache cabal work
-      id: cache-cabal-local
-      uses: actions/cache@v3
-      with:
-        path: ${{ steps.cache-keys.outputs.cabal-local-path }}
-        key: ${{ runner.os }}-ghc-${{ steps.cache-keys.outputs.ghc }}-cabal-${{ steps.cache-keys.outputs.cabal }}-cabal-local-${{ steps.cache-keys.outputs.hashfiles }}
     - name: Parse .tool-versions and converts to JSON
-      run: |
-        echo $PWD
-        tool_versions_path=$(readlink -f .tool-versions)
-        echo $PWD
-        cd $GITHUB_ACTION_PATH
-        cat "$tool_versions_path" | cabal v2-run -v0 action-parse-asdf-tool-versions | echo "json=$(</dev/stdin)" | tee --append $GITHUB_OUTPUT
+      run: cat .tool-versions | ruby "$GITHUB_ACTION_PATH/scripts/asdf2json.rb" | echo "json=$(</dev/stdin)" | tee -a $GITHUB_OUTPUT
       shell: bash
       id: parser
       env:
