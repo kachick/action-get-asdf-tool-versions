@@ -16,7 +16,7 @@ jobs:
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v3
-      - uses: kachick/action-parse-asdf-tool-versions@v1
+      - uses: kachick/action-parse-asdf-tool-versions@v2
         id: parse
     outputs:
       tool-versions: "${{ steps.parse.outputs.json }}"
@@ -40,3 +40,5 @@ Actual working examples are below.
 - [crystal](https://github.com/kachick/renovate-config-asdf/blob/d1426468e080110293038ec3ffed6aa843c93eae/.github/workflows/ci-crystal.yml#L41)
 - [bun](https://github.com/kachick/kachick.github.io/blob/924a9306b48bdc5378426a84075908fc4cae1cdc/.github/workflows/lint.yml#L27)
 - [dprint](https://github.com/kachick/renovate-config-asdf/blob/d1426468e080110293038ec3ffed6aa843c93eae/.github/workflows/lint.yml#L30)
+
+v1 and v2 takes same inputs. Just replaced the implementation. (v2 might take long time than v1...)
