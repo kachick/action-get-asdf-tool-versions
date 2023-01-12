@@ -36,12 +36,12 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ~/.cabal
-          key: ${{ runner.os }}-ghc-${{ steps.haskell-versions.ghc }}-cabal-${{ steps.haskell-versions.cabal }}-cabal-test-global-${{ hashFiles('src/**', 'app/**', 'test/**', '*.cabal') }}
+          key: ${{ runner.os }}-ghc-${{ steps.haskell-versions.outputs.ghc }}-cabal-${{ steps.haskell-versions.outputs.cabal }}-cabal-test-global-${{ hashFiles('src/**', 'app/**', 'test/**', '*.cabal') }}
       - name: Cache cabal work
         id: cache-cabal-test-local
         uses: actions/cache@v3
         with:
           path: dist-newstyle
-          key: ${{ runner.os }}-ghc-${{ steps.haskell-versions.ghc }}-cabal-${{ steps.haskell-versions.cabal }}-cabal-test-local-${{ hashFiles('src/**', 'app/**', 'test/**', '*.cabal') }}
+          key: ${{ runner.os }}-ghc-${{ steps.haskell-versions.outputs.ghc }}-cabal-${{ steps.haskell-versions.outputs.cabal }}-cabal-test-local-${{ hashFiles('src/**', 'app/**', 'test/**', '*.cabal') }}
       - run: cabal update
       - run: cabal test
