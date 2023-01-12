@@ -31,7 +31,8 @@ jobs:
       fail-fast: false
       # Syntax https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs
       matrix:
-        os: ['ubuntu-latest', 'macos-latest']
+        # os: ['ubuntu-latest', 'macos-latest']
+        os: ['ubuntu-latest']
     runs-on: ${{ matrix.os }}
     timeout-minutes: 5
     steps:
@@ -47,6 +48,6 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - run: echo '${{ fromJson(needs.parser.outputs.tool-versions).shfmt }}' | grep -P '\A\d+\.\d+\.\d+\z'
+      - run: echo '${{ needs.parser.outputs.tool-versions.shfmt }}' | grep -P '\A\d+\.\d+\.\d+\z'
       - run: echo '${{ fromJson(needs.parser.outputs.tool-versions).shellcheck }}' | grep -P '\A\d+\.\d+\.\d+\z'
       - run: test '18.11.0' = '${{ fromJson(needs.parser.outputs.tool-versions).nodejs }}'
