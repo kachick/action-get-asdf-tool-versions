@@ -1,7 +1,6 @@
 module Asdf.ParserSpec (main, spec) where
 
 import Test.Hspec
--- import Control.Exception (evaluate)
 import Asdf.Parser (parseAsdf, toJson)
 import Data.Function ((&))
 
