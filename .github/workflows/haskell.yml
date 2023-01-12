@@ -25,7 +25,14 @@ jobs:
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v3
+      - name: Cache cabal
+        id: cache-cabal
+        uses: actions/cache@v3
+        with:
+          path: dist-newstyle
+          key: ${{ runner.os }}-cabal-dist-${{ hashFiles('src/**', 'app/**', '*.cabal') }}
       - run: cabal update
+        if: steps.cache-cabal.outputs.cache-hit != 'true'
       - run: cabal test
 
   build:
@@ -33,7 +40,12 @@ jobs:
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v3
-      # - run: cabal update
+      - name: Cache cabal
+        id: cache-cabal
+        uses: actions/cache@v3
+        with:
+          path: dist-newstyle
+          key: ${{ runner.os }}-cabal-dist-${{ hashFiles('src/**', 'app/**', '*.cabal') }}
       - run: cat .tool-versions | cabal v2-run -v0 scripts/Main.hs | echo "json=$(</dev/stdin)" | tee --append $GITHUB_OUTPUT
         shell: bash
         id: parser
