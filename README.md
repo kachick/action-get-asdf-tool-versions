@@ -8,7 +8,7 @@ Tested on ubuntu-latest and macos-latest.
 
 # Usage
 
-Only need `id` field for this action
+Specify the path if you want. If not, `.tool-versions` will given
 
 ```yaml
 jobs:
@@ -17,8 +17,11 @@ jobs:
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v3
-      - uses: kachick/action-parse-asdf-tool-versions@v2
+      - uses: kachick/action-parse-asdf-tool-versions@v3
         id: parse
+        # with:
+        #   # default '.tool-versions'
+        #   tool-versions-path: 'asdf-managed-dir/.tool-versions'
     outputs:
       tool-versions: "${{ steps.parse.outputs.json }}"
   test:
