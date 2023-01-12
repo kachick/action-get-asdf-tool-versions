@@ -26,7 +26,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: gather haskell versions
-        run: echo "ghc=$(ghc --numeric-version)\ncabal=$(cabal --numeric-version)" | tee --append $GITHUB_OUTPUT
+        run: |
+          echo "ghc=$(ghc --numeric-version)" | tee --append $GITHUB_OUTPUT
+          echo "cabal=$(cabal --numeric-version)" | tee --append $GITHUB_OUTPUT
         shell: bash
         id: haskell-versions
       - name: Cache cabal global
