@@ -3,7 +3,8 @@
 [![CI - Itself](https://github.com/kachick/action-parse-asdf-tool-versions/actions/workflows/validate.yml/badge.svg?branch=main)](https://github.com/kachick/action-parse-asdf-tool-versions/actions/workflows/validate.yml?query=branch%3Amain++)
 [![CI - Test](https://github.com/kachick/action-parse-asdf-tool-versions/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/kachick/action-parse-asdf-tool-versions/actions/workflows/test.yml?query=branch%3Amain++)
 
-Parse asdf .tool-versions and outputs with JSON
+Parse asdf .tool-versions and outputs with JSON for actions
+Tested with ubuntu-latest and macos-latest.
 
 # Usage
 
