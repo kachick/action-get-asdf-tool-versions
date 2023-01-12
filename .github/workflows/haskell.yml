@@ -25,11 +25,21 @@ jobs:
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v3
-      - name: Cache cabal
-        id: cache-cabal
+      - name: gather haskell versions
+        run: echo "ghc=$(ghc --numeric-version)\ncabal=$(cabal --numeric-version)" | tee --append $GITHUB_OUTPUT
+        shell: bash
+        id: haskell-versions
+      - name: Cache cabal global
+        id: cache-cabal-test-global
+        uses: actions/cache@v3
+        with:
+          path: ~/.cabal
+          key: ${{ runner.os }}-ghc-${{ steps.haskell-versions.ghc }}-cabal-${{ steps.haskell-versions.cabal }}-cabal-test-global-${{ hashFiles('src/**', 'app/**', 'test/**', '*.cabal') }}
+      - name: Cache cabal work
+        id: cache-cabal-test-local
         uses: actions/cache@v3
         with:
           path: dist-newstyle
-          key: ${{ runner.os }}-cabal-test-${{ hashFiles('src/**', 'app/**', '*.cabal') }}
+          key: ${{ runner.os }}-ghc-${{ steps.haskell-versions.ghc }}-cabal-${{ steps.haskell-versions.cabal }}-cabal-test-local-${{ hashFiles('src/**', 'app/**', 'test/**', '*.cabal') }}
       - run: cabal update
       - run: cabal test
