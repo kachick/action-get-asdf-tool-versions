@@ -6,7 +6,7 @@
 Parse asdf .tool-versions and outputs with JSON for preparing GitHub Actions\
 Tested on ubuntu-latest and macos-latest.
 
-# Usage
+## Usage
 
 Specify the path if you want. If not, `.tool-versions` will given
 
